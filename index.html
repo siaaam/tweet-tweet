@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
+  <link rel="stylesheet" href="./style.css">
+  <title>Tweet Tweet</title>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 class="text-center">Tweet Tweet</h1>
+      <hr>
+    </header>
+    <section class="search-tweet d-flex justify-content-between">
+      <div class="alert alert-danger error-msg" role="alert">enter text between 1-250 characters!
+      </div>
+      <div  class="search-box">
+        <input type="text" id="search" placeholder="Search Tweet">
+      </div>
+    </section>
+    <section class="main-body d-flex justify-content-between">
+      <div class="submit-tweet">
+        <input class="input-group" type="text" id="tweet-text" placeholder="Post A Tweet">
+        <p><span class="char-counter">0</span>/250</p>
+        <button type="button" class="btn btn-primary btn-block btn-submit">Submit</button>
+      </div>
+      <div class="tweet-text card card-body">
+        <ul class="list-group collection">
+          <!-- <li class="list-group-item collection-item">
+            <p>tweet text</p>
+            <button class="btn btn-danger dlt-tweet float-right"> delete</button>
+          </li> -->
+          <!-- <li class="list-group-item collection-item">
+            <p>tweet text</p>
+            <button class="btn btn-danger dlt-tweet float-right"> Delete</button>
+            <p class="float-right">10 min ago</p>
+          </li>
+          <li class="list-group-item collection-item">
+            <p>tweet text</p>
+            <button class="btn btn-danger dlt-tweet">Delete</button>
+          </li> -->
+          
+          
+        </ul>
+        <!-- <ul class="list-group collection"> -->
+          <!-- <li class="list-group-item collection-item" id="product-0">
+            <strong>Microphone</strong> - <span class="price">$30</span>
+            <i class="fa fa-trash float-right delete-product"></i>
+          </li> -->
+          <!-- <li class="list-group-item collection-item">
+            <strong>Shoes</strong> - <span class="price">$30</span>
+            <i class="fa fa-trash float-right"></i>
+          </li>
+          <li class="list-group-item collection-item">
+            <strong>Mobile</strong> - <span class="price">$30</span>
+            <i class="fa fa-trash float-right"></i>
+          </li> -->
+        </ul>
+      </div>
+    </section>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>

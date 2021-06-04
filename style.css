@@ -1,0 +1,19 @@
+
+
+.tweet-text {
+  margin-left: 100px;
+}
+.search-tweet {
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+.btn-submit{
+  margin-top: 10px;
+}
+#tweet-text{
+  height: 100px;
+}
+
+.error-msg  {
+  display: none;
+}
