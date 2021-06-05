@@ -87,6 +87,7 @@ function addTweet(){
   } else {
     itemGroup.innerHTML = ''
     displayData()
+    char.textContent = 0;
     document.querySelector('.error-msg').style.display = 'none'
   }
 }
