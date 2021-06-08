@@ -44,7 +44,7 @@ let tweetData = getDataFromLS()
 displayData()
 function displayData(){
   tweetData.forEach(tweet => {
-    const {id,text} = tweet
+    const {id,text,time} = tweet
     let li = document.createElement('li')
   li.className = 'list-group-item collection-item'
   li.id = `tweet-${id}`
@@ -54,6 +54,9 @@ function displayData(){
   let button = document.createElement('button')
   button.className = 'btn btn-danger dlt-tweet float-right'
   button.textContent = 'Delete'
+  let h6 = document.createElement('h6')
+  h6.textContent = time
+  li.append(h6)
   li.append(button)
   itemGroup.append(li)
   postInputUI.value = ''
@@ -72,6 +75,7 @@ function addTweet(){
     }
     data.id = id
     data.text = postInputUI.value
+    data.time = dayjs().format('MMM-DD-YYYY hh.mm a')
 
     if(data.text.length>0 && data.text.length < 250){
       tweetData.push(data)
@@ -88,7 +92,6 @@ function addTweet(){
     itemGroup.innerHTML = ''
     displayData()
     char.textContent = 0;
-    document.querySelector('.error-msg').style.display = 'none'
   }
 }
 
