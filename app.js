@@ -51,13 +51,17 @@ function displayData(){
   let p = document.createElement('p')
   p.textContent = text
   li.append(p)
-  let button = document.createElement('button')
-  button.className = 'btn btn-danger dlt-tweet float-right'
-  button.textContent = 'Delete'
+  let dltButton = document.createElement('button')
+  dltButton.className = 'btn btn-danger dlt-tweet float-right'
+  dltButton.textContent = 'Delete'
   let h6 = document.createElement('h6')
   h6.textContent = time
   li.append(h6)
-  li.append(button)
+  let editButton = document.createElement('button')
+  editButton.className = 'btn btn-secondary edit-tweet float-right'
+  editButton.textContent = 'Edit'
+  li.append(editButton)
+  li.append(dltButton)
   itemGroup.append(li)
   postInputUI.value = ''
   })
@@ -95,16 +99,32 @@ function addTweet(){
   }
 }
 
-// delete tweet
-itemGroup.addEventListener('click',deleteTweet)
-function deleteTweet(e){
+//modify or dlt tweet
+itemGroup.addEventListener('click',modifyOrDltTweet)
+function modifyOrDltTweet(e){
   if(e.target.classList.contains('dlt-tweet')){
     let target = e.target.parentElement
     target.remove()
     let id = parseInt(target.id.split('-')[1])
-    
-
-  deleteDataFromLS(id)
+    deleteDataFromLS(id)
+  } else if(e.target.classList.contains('edit-tweet')){
+    let idStr = e.target.parentElement.id
+    let id = parseInt(idStr.split('-')[1])
+    let foundData = tweetData.find(elem => elem.id === id)
+    let {text} = foundData
+    // console.log(text)
+    let liTxt = e.target.parentElement.firstElementChild.textContent
+    postInputUI.value = liTxt
+    submitBtn.style.display = 'none'
+    let updateBtn = `<button type="button" class="btn btn-primary btn-block btn-update">Update</button>`
+    document.querySelector('.submit-tweet').insertAdjacentHTML('beforeend',updateBtn)
+    document.querySelector('.btn-update').addEventListener('click',(e)=>{
+      e.preventDefault()
+      foundData.text = postInputUI.value
+      localStorage.setItem('tweetDataLS',JSON.stringify(tweetData))
+      location.reload()
+      displayData()
+    })
   }
 }
 
