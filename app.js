@@ -44,7 +44,7 @@ let tweetData = getDataFromLS()
 displayData()
 function displayData(){
   tweetData.forEach(tweet => {
-    const {id,text,time} = tweet
+    const {id,text,time,unFomatTime} = tweet
     let li = document.createElement('li')
   li.className = 'list-group-item collection-item'
   li.id = `tweet-${id}`
@@ -55,8 +55,14 @@ function displayData(){
   dltButton.className = 'btn btn-danger dlt-tweet float-right'
   dltButton.textContent = 'Delete'
   let h6 = document.createElement('h6')
-  h6.textContent = time
+  // let update time
+  let updatedTime = dayjs(unFomatTime).fromNow()
+  h6.textContent = updatedTime
   li.append(h6)
+  let p1 = document.createElement('p1')
+  p1.className = 'our-time'
+  p1.textContent = time
+  li.append(p1)
   let editButton = document.createElement('button')
   editButton.className = 'btn btn-secondary edit-tweet float-right'
   editButton.textContent = 'Edit'
@@ -77,9 +83,11 @@ function addTweet(){
     } else {
       id = tweetData[tweetData.length - 1].id + 1
     }
+
     data.id = id
     data.text = postInputUI.value
-    data.time = dayjs().format('MMM-DD-YYYY hh.mm a')
+    data.unFomatTime = dayjs().format()
+    data.time = dayjs().format('YYYY-MMM-DD hh.mm a')
 
     if(data.text.length>0 && data.text.length < 250){
       tweetData.push(data)
@@ -104,6 +112,7 @@ itemGroup.addEventListener('click',modifyOrDltTweet)
 function modifyOrDltTweet(e){
   if(e.target.classList.contains('dlt-tweet')){
     let target = e.target.parentElement
+    // console.log(parseInt(target.id.split('-')[1]))
     target.remove()
     let id = parseInt(target.id.split('-')[1])
     deleteDataFromLS(id)
@@ -111,6 +120,7 @@ function modifyOrDltTweet(e){
     let idStr = e.target.parentElement.id
     let id = parseInt(idStr.split('-')[1])
     let foundData = tweetData.find(elem => elem.id === id)
+    console.log(foundData.text)
     let {text} = foundData
     // console.log(text)
     let liTxt = e.target.parentElement.firstElementChild.textContent
@@ -118,6 +128,7 @@ function modifyOrDltTweet(e){
     submitBtn.style.display = 'none'
     let updateBtn = `<button type="button" class="btn btn-primary btn-block btn-update">Update</button>`
     document.querySelector('.submit-tweet').insertAdjacentHTML('beforeend',updateBtn)
+
     document.querySelector('.btn-update').addEventListener('click',(e)=>{
       e.preventDefault()
       foundData.text = postInputUI.value
@@ -133,6 +144,8 @@ searchInput.addEventListener('keyup',searchTweet)
 function searchTweet(e){
 let items = Array.from(itemGroup.children)
 items.forEach(item => {
+  console.log(item.firstElementChild.textContent)
+  console.log(e.target.value)
   if(item.firstElementChild.textContent.indexOf(e.target.value) !== -1){
     item.style.display = 'block'
   }
